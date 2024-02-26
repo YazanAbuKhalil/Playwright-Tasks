@@ -48,11 +48,21 @@ class CarsForSalePage {
     this.viewMoreButton = page.locator("#viewMoreButton");
   }
 
+  /**
+ * Selects a car make from the dropdown list
+ * @param {string} makeInput The car make input value to be filled.
+ * @returns {Promise<void>} A Promise that resolves once the car make is selected.
+ */
   async selectCarMake(makeInput: string) {
     await this.carMakeSearchInput.fill(makeInput);
     await this.carMakeDropdownItems.first().click();
   }
 
+  /**
+   * Select a car model from the dropdown list
+   * @param {string} modelInput 
+   * @returns {Promise<void>} A Promise that resolves once the car model is selected.
+   */
   async selectCarModel(modelInput: string) {
     await this.carModelSearchInput.click();
     await this.carModelSearchInput.fill(modelInput);
@@ -60,11 +70,21 @@ class CarsForSalePage {
     await this.page.waitForURL(/fusion/, {waitUntil: "commit"});
   }
 
+  /**
+   * Select a from date from the dropdown list
+   * @param {string} dateInput 
+   * @returns {Promise<void>}  A Promise that resolves once the from date is selected.
+   */
   async selectFromDate(dateInput: string) {
     await this.fromDateInput.fill(dateInput);
     await this.datesDropdownMenueItems.first().click();
   }
 
+  /**
+   * Select a to date from the dropdown list
+   * @param {string} dateInput 
+   * @returns {Promise<void>}  A Promise that resolves once the to date is selected.
+   */
   async selectToDate(dateInput: string) {
     await this.toDateInput.fill(dateInput);
     await this.datesDropdownMenueItems.first().click();
@@ -84,6 +104,12 @@ class CarsForSalePage {
     return newPage;
   }
 
+  /**
+   * Select date for car 
+   * @param {string} dateFrom 
+   * @param {string} dateTo 
+   * @returns {Promise<Page>} A Promise that resolves once the to date is selected.
+   */
   async selectDate(dateFrom: string, dateTo: string) {
     await this.selectFromDate(dateFrom);
     await this.page.waitForURL(/Car_Year_from/, {waitUntil: "commit"});
@@ -92,12 +118,22 @@ class CarsForSalePage {
     await this.page.reload({waitUntil: "commit"});
   }
 
+  /**
+   * Select a city from the dropdown list
+   * @param {string} cityInput 
+   * @returns {Promise<Page>} A Promise that resolves once the to city is selected.
+   */
   async selectCity(cityInput: string) {
     await this.cityInput.fill(cityInput);
     await this.citiesDropDownList.first().click();
     await this.page.waitForURL(/irbid/, {waitUntil: "commit"});
   }
 
+  /**
+   * Select a color from the dropdown list
+   * @param {string} colorInput 
+   * @returns {Promise<Page>} A Promise that resolves once the to color is selected.
+   */
   async selectColor(colorInput: string) {
     await this.colorInput.fill(colorInput);
     await this.carColorDropDownItems.first().click();
@@ -111,6 +147,7 @@ class CarsForSalePage {
         (await this.firstCarResult.locator(this.turboIcon).isVisible())
     ).toBeTruthy();
   }
+
 
   async checkFirstCarItemMake() {
     await expect(this.carsResultsInfo.nth(0)).toContainText(carsData.make);
