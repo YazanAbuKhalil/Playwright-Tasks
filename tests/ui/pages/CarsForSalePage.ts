@@ -58,19 +58,30 @@ class CarsForSalePage {
     await this.carModelSearchInput.fill(modelInput);
     await this.carModelDropdownItems.first().click();
     await this.page.waitForURL(/fusion/, {waitUntil: "commit"});
-    //await this.page.waitForNavigation({waitUntil: "load"});
-    //await this.page.waitForLoadState("networkidle");
   }
 
   async selectFromDate(dateInput: string) {
     await this.fromDateInput.fill(dateInput);
     await this.datesDropdownMenueItems.first().click();
-
   }
 
   async selectToDate(dateInput: string) {
     await this.toDateInput.fill(dateInput);
     await this.datesDropdownMenueItems.first().click();
+  }
+
+  /**
+ * Creates a new page by clicking on the specified element, waiting for a popup event.
+ * @param {Page} currentPage The current page object.
+ * @param {Locator} element The locator of the element that triggers the opening of a new page.
+ * @returns {Promise<Page>} A Promise that resolves to the new page object.
+ */
+  async getNewPage(currentPage: Page, element: Locator): Promise<Page> {
+    const [newPage] = await Promise.all([
+      currentPage.waitForEvent("popup"),
+      await element.click()
+    ]);
+    return newPage;
   }
 
   async selectDate(dateFrom: string, dateTo: string) {
@@ -91,7 +102,6 @@ class CarsForSalePage {
     await this.colorInput.fill(colorInput);
     await this.carColorDropDownItems.first().click();
     await this.page.waitForURL(/Car_Color/, {waitUntil: "commit"});
-
   }
 
   async checkFirstCarItemContainsIcon() {
@@ -111,7 +121,6 @@ class CarsForSalePage {
   }
 
   async checkCarsResultsDate() {
-   // await this.page.pause();
     const resultsCount = await this.carsResultsInfo.count();
     for (let i = 0; i < resultsCount; i++) {
         await expect(this.carsResultsInfo.nth(i)).toContainText(carsData.fromYear);
@@ -139,6 +148,5 @@ class CarsForSalePage {
     await ad.waitFor({state: "visible"});
     await expect(ad).toBeVisible();
   }
-
 }
 export default CarsForSalePage;

@@ -9,14 +9,12 @@ let homepage: HomePage;
 let carsPage: CarsPage;
 let carsForSalePage: CarsForSalePage;
 let carsDetailsPage: CarsDetailsPage;
-
 test.describe("Filter Cars For Sale Functionality", () => {
     test.beforeEach(async({page}) => {
         homepage = new HomePage(page);
         carsPage = new CarsPage(page);
         carsForSalePage = new CarsForSalePage(page);
         carsDetailsPage = new CarsDetailsPage(page);
-
 
         await page.goto(homepage.path);
         await homepage.autosIcon.click();
@@ -38,22 +36,15 @@ test.describe("Filter Cars For Sale Functionality", () => {
     test("verify correct city filtering on the first page results", async({page}) => {
         await carsForSalePage.viewMoreButton.click();
         await carsForSalePage.selectCity(carsData.city);
-        const [newPage] = await Promise.all([
-            page.waitForEvent("popup"),
-            await carsForSalePage.firstCarResult.click()
-        ]);
-
-        await carsDetailsPage.checkFirstCarCity(newPage);
+        const carDetailsPage = await carsForSalePage.getNewPage(page, carsForSalePage.firstCarResult)
+        await carsDetailsPage.checkFirstCarCity(carDetailsPage);
     });
 
     test("Verify Correct Color filtering on the first page results", async({page}) => {
         await carsForSalePage.viewMoreButton.click();
         await carsForSalePage.selectColor(carsData.color);
-        const [newPage] = await Promise.all([
-            page.waitForEvent("popup"),
-            await carsForSalePage.firstCarResult.click()
-        ]);
-        await carsDetailsPage.checkFirstCarColor(newPage);
+        const carDetailsPage = await carsForSalePage.getNewPage(page, carsForSalePage.firstCarResult)
+        await carsDetailsPage.checkFirstCarColor(carDetailsPage);
     });
 });
 
