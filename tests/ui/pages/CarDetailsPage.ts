@@ -1,14 +1,14 @@
 import {Page, Locator, expect} from "@playwright/test";
 
 class CarsDetailsPage {
-    readonly page: Page;
     readonly cityLabel: Locator;
     readonly colorLabel: Locator;
+    readonly page: Page;
 
     constructor(page: Page) {
-        this.page = page;
         this.cityLabel = page.locator("a.City");
         this.colorLabel = page.locator("a.Color");
+        this.page = page;
     }
 
     async checkFirstCarCity(newPage: Page) {

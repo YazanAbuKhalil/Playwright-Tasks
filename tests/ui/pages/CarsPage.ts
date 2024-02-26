@@ -1,12 +1,12 @@
 import { Page, Locator } from "@playwright/test";
 
 class CarsPage {
-  readonly page: Page;
   readonly carsForSaleIcon: Locator;
+  readonly page: Page;
 
   constructor(page: Page) {
-    this.page = page;
     this.carsForSaleIcon = page.locator(".sc-c2e05b1b-0 a:nth-child(2)");
+    this.page = page;
   }
 }
 export default CarsPage;

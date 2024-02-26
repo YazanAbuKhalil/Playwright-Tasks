@@ -11,8 +11,6 @@ let carsForSalePage: CarsForSalePage;
 let carsDetailsPage: CarsDetailsPage;
 
 test.describe("Filter Cars For Sale Functionality", () => {
-    //test.describe.configure({mode: "serial"});
-
     test.beforeEach(async({page}) => {
         homepage = new HomePage(page);
         carsPage = new CarsPage(page);
@@ -82,13 +80,3 @@ test.describe("Ads Testing", () => {
         await carsForSalePage.checkAdDimension(carsForSalePage.centerBannerAd, 728, 90);
     });
 });
-
-
-
-
-
-
-
-
-
-

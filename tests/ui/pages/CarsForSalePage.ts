@@ -2,56 +2,50 @@ import { Page, Locator, expect } from "@playwright/test";
 import carsData from "../../data/carsData";
 
 class CarsForSalePage {
-  readonly page: Page;
+  readonly carColorDropDownItems: Locator;
+  readonly carMakeDropdownItems: Locator;
   readonly carMakeSearchInput: Locator;
+  readonly carModelDropdownItems: Locator;
   readonly carModelSearchInput: Locator;
-  readonly fromDateInput: Locator;
-  readonly toDateInput: Locator;
+  readonly carsListItemsSelector: string = "#listing_posts > div a";
+  readonly carsListResults: Locator;
+  readonly carsResultsInfo: Locator;
+  readonly centerBannerAd: Locator;
+  readonly citiesDropDownList: Locator;
   readonly cityInput: Locator;
   readonly colorInput: Locator;
-  readonly firstCarResult: Locator;
-  readonly filterListResult: Locator;
-  readonly carsListResults: Locator;
-  readonly carMakeDropdownItems: Locator;
-  readonly carModelDropdownItems: Locator;
-  readonly carsResultsInfo: Locator;
-  readonly firstCarMakeAndModel: Locator;
   readonly datesDropdownMenueItems: Locator;
-  readonly citiesDropDownList: Locator;
-  readonly viewMoreButton: Locator;
-  readonly carColorDropDownItems: Locator;
-  readonly ads: Locator;
-  readonly sideBannerAd: Locator;
-  readonly centerBannerAd: Locator;
+  readonly filterListResult: Locator;
+  readonly firstCarMakeAndModel: Locator;
+  readonly firstCarResult: Locator;
+  readonly fromDateInput: Locator;
+  readonly page: Page;
   readonly premiumIcon: string = "[data-name='iconPremium']";
+  readonly sideBannerAd: Locator;
+  readonly toDateInput: Locator;
   readonly turboIcon: string = "[data-name='iconTurbo']";
-  readonly carsListItemsSelector: string = "#listing_posts > div a";
+  readonly viewMoreButton: Locator;
 
   constructor(page: Page) {
-    this.page = page;
+    this.carColorDropDownItems = page.locator(".sc-fcf18714-0 ul li");
+    this.carMakeDropdownItems = page.locator(".sc-a373be11-0 ul li");
     this.carMakeSearchInput = page.locator("input[placeholder='Search For Car Make']");
+    this.carModelDropdownItems = page.locator(".sc-a373be11-0 ul li");
     this.carModelSearchInput = page.locator("input[placeholder='Search For Model']");
-    this.firstCarResult = page.locator("#serpMainContent a").nth(0);
     this.carsListResults = page.locator("#serpMainContent a");
-    this.carMakeDropdownItems = page.locator(
-      ".sc-a373be11-0 ul li"
-    );
-    this.carModelDropdownItems = page.locator(
-      ".sc-a373be11-0 ul li"
-    );
-    this.fromDateInput = page.locator("input[placeholder='From']").nth(0);
-    this.toDateInput = page.locator("input[placeholder='To']").nth(0);
-    this.datesDropdownMenueItems = page.locator(".sc-867cbe24-0 ul li");
     this.carsResultsInfo = page.locator("#serpMainContent  a .postDet > :nth-child(2)");
+    this.centerBannerAd = page.locator("[data-google-container-id='1']");
     this.cityInput = page.locator("input[placeholder='Search For  City']");
     this.citiesDropDownList = page.locator(".sc-6e955ec3-0 ul li");
-    this.viewMoreButton = page.locator("#viewMoreButton");
     this.colorInput = page.locator("input[placeholder='Search For Color']");
-    this.carColorDropDownItems = page.locator(".sc-fcf18714-0 ul li");
+    this.datesDropdownMenueItems = page.locator(".sc-867cbe24-0 ul li");
     this.filterListResult = page.locator("#listing_posts > div");
-    this.ads = page.locator("#lazyLoadingBanners");
+    this.firstCarResult = page.locator("#serpMainContent a").nth(0);
+    this.fromDateInput = page.locator("input[placeholder='From']").nth(0);
+    this.page = page;
     this.sideBannerAd = page.locator("[data-google-container-id='2']");
-    this.centerBannerAd = page.locator("[data-google-container-id='1']");
+    this.toDateInput = page.locator("input[placeholder='To']").nth(0);
+    this.viewMoreButton = page.locator("#viewMoreButton");
   }
 
   async selectCarMake(makeInput: string) {
