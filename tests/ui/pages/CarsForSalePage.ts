@@ -47,7 +47,6 @@ class CarsForSalePage {
     this.toDateInput = page.locator("input[placeholder='To']").nth(0);
     this.viewMoreButton = page.locator("#viewMoreButton");
   }
-
   /**
  * Selects a car make from the dropdown list
  * @param {string} makeInput The car make input value to be filled.
