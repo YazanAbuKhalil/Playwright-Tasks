@@ -10,6 +10,7 @@ import { defineConfig, devices } from "@playwright/test";
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
+  //globalSetup: require.resolve('./tests/setup/globalSetup'),
   testDir: "./tests",
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -17,19 +18,15 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
-  
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : 5,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: "html",
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
-  
   use: {
     baseURL: "https://jo.opensooq.com",
     trace: "on-first-retry",
     headless: false,
-    viewport: { width: 2000, height: 800 },
-
   },
 
   /* Configure projects for major browsers */
