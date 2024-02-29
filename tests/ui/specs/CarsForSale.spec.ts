@@ -1,5 +1,4 @@
-import {Browser,Page,BrowserContext,chromium} from "@playwright/test";
-import {test} from "../fixtures/openSooqFixtures";
+import {Browser,Page,BrowserContext,chromium, test} from "@playwright/test";
 import HomePage from "../pages/HomePage";
 import CarsPage from "../pages/CarsPage";
 import CarsForSalePage from "../pages/CarsForSalePage";
