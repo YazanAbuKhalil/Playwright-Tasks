@@ -26,7 +26,7 @@ export default defineConfig({
   use: {
     baseURL: "https://jo.opensooq.com",
     trace: "on-first-retry",
-    headless: false,
+    headless: true,
   },
 
   /* Configure projects for major browsers */
